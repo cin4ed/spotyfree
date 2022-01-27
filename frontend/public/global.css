@@ -1,0 +1,79 @@
+/* <Variables and dependencies> */
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500&family=PT+Sans+Narrow:wght@700&display=swap');
+
+:root {
+	--white-color: #FFFFFF;
+	--red-color: #ff5c5c;
+	--primary-color: #1DB954;
+	--primary-font-dark: #191414;
+	--primary-font-light: #FFFFFF;
+	--secondary-color: #b5b5b5;
+	--secondary-font-dark: #a1a1a1;
+	--secondary-font-light: #FFFFFF;
+}
+/* </Variables and dependencies> */
+
+/* <Const> */
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+html {
+	background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
+	background-repeat: no-repeat;
+	background-attachment: fixed;;
+	background-size: cover;
+}
+
+html, body {
+	position: relative;
+	width: 100%;
+}
+
+/*
+	Fucking media queries...
+		max-width: 700px  =  width <= 700px
+		min-width: 700px  =  width >= 700px
+*/
+		
+/* Common media queries, put your shit on each one: */
+@media screen and (min-width: 1201px) { /* 1201px and more —  Extra large screens, TV */
+	body {
+		display: grid;
+		grid-template: ". content . " / 1fr minmax(100px, 700px) 1fr;
+	}
+}
+
+@media screen and (min-width: 1025px) { /* 1025px — 1200px: Desktops, large screens */
+	body {
+		display: grid;
+		grid-template: ". content . " / 1fr minmax(100px, 700px) 1fr;
+	}
+}
+
+@media screen and (min-width: 769px) { /* 769px — 1024px: Small screens, laptops */
+	body {
+		display: grid;
+		grid-template: ". content . " / 1fr minmax(100px, 700px) 1fr;
+	}
+}
+
+@media screen and (min-width: 481px) { /* 481px — 768px: iPads, Tablets */
+	
+}
+
+@media screen and (min-width: 320px) { /* 320px — 480px: Mobile devices */
+	body {
+		display: grid;
+		grid-template: ". content . " / 1fr minmax(100px, 700px) 1fr;
+	}
+}
+/* </Const> */
