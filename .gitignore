@@ -341,4 +341,4 @@ pip-selfcheck.json
 
 # My shit
 extras
-song_downloads/*
+backend/song_downloads/*
