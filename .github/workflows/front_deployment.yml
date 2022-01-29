@@ -31,6 +31,6 @@ jobs:
           target_ip: ${{ secrets.LINODE_VM_IP }}
           user: ${{ secrets.LINODE_VM_USERNAME }}
         run: |
-          echo $ssh_key > ~/ssh_key
+          echo "$ssh_key" > ~/ssh_key
           chmod 600 ~/ssh_key
-          rsync rsync -e "ssh -i ~/ssh_key -o StrictHostKeyChecking=no" -avrz ./public $user@$target_ip:/var/www/spotyfree.xyz
+          rsync -e "ssh -i ~/ssh_key -o StrictHostKeyChecking=no" -avrz ./public/* $user@$target_ip:/var/www/spotyfree.xyz
