@@ -1,16 +1,12 @@
 name: front - build and deploy to linode
 
 on:
-  pull_request:
-    branches: [ master ]
+  push:
+    paths:
+      - frontend/**
 
 jobs:
-  deploy_to_linode:
+  say_hi:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 16
-      - run: npm ci
-      - run: npm run build
+      - run: HI! you changed something inside frontend right? 
