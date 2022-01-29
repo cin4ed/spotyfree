@@ -8,6 +8,9 @@ on:
 jobs:
   Build-Svelte-App:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
     steps:
       - uses: actions/checkout@v2
 
@@ -17,7 +20,7 @@ jobs:
           node-version: 16
 
       - name: 📦 Install dependencies
-        run: cd ${{ github.workspace }}/frontend && npm i
+        run: npm i
 
       - name: 🛠 Build app
         run: npm run build
