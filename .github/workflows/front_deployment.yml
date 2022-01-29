@@ -16,19 +16,11 @@ jobs:
         with:
           node-version: 16
 
-      - name: 🛠 Install dependencies and build app
-      - run: npm i
-      - run: npm run build
+      - name: 📦 Install dependencies
+        run: npm i
 
-      - name: Deploy to linode via SSH
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.LINODE_VM_IP }}
-          username: ${{ secrets.LINODE_VM_USERNAME }}
-          key: ${{ secrets.LINODE_VM_SSH }}
-          script: |
-            cd /var/www/spotyfree.xyz
-            git pull
+      - name: 🛠 Build app
+        run: npm run build
 
       - name: 📲 Send files to linode server
-      - run: ls
+        run: ls
