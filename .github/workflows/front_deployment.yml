@@ -26,5 +26,4 @@ jobs:
         run: npm run build
 
       - name: 📲 Send files to linode server
-        run: |
-        rsync rsync -e "ssh -i ${{ secrets.LINODE_VM_SSH }}" -avrz ./public ${{ secrets.LINODE_VM_USERNAME }}@${{ secrets.LINODE_VM_IP }}:/var/www/spotyfree.xyz
+        run: rsync rsync -e "ssh -i ${{ secrets.LINODE_VM_SSH }}" -avrz ./public ${{ secrets.LINODE_VM_USERNAME }}@${{ secrets.LINODE_VM_IP }}:/var/www/spotyfree.xyz
