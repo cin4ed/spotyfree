@@ -9,4 +9,4 @@ jobs:
   say_hi:
     runs-on: ubuntu-latest
     steps:
-      - run: HI! you changed something inside frontend right? 
+      - run: echo "HI! you changed something inside frontend right?""
