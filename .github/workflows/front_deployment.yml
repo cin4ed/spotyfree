@@ -17,8 +17,8 @@ jobs:
           node-version: 16
 
       - name: 🛠 Install dependencies and build app
-        run: npm i
-        run: npm run build
+      - run: npm i
+      - run: npm run build
 
       - name: Deploy to linode via SSH
         uses: appleboy/ssh-action@master
@@ -31,4 +31,4 @@ jobs:
             git pull
 
       - name: 📲 Send files to linode server
-        run: ls
+      - run: ls
