@@ -26,7 +26,7 @@ SpotifyClient.init(
 downloader = DownloadManager()
 
 # get output path
-output_path = str(Path("./song_downloads").absolute())
+output_path = str(Path('app/song_downloads').absolute())
 
 # get track metadata from spotify track, and embed it in the response
 # (this is for frontend displaying)
@@ -148,6 +148,9 @@ async def download_single_song(spotify_track_url: str) -> dict:
         return response
 
     # change directory to output path and perform download
+    print("OUTPUTPATH")
+    print(output_path)
+    print("OUTPUTPATH")
     os.chdir(output_path)
 
     # try to download the song
