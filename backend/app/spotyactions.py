@@ -134,6 +134,9 @@ async def download_single_song(spotify_track_url: str) -> dict:
     }
 
     # if output_path (defined in this module) doesn't exists
+    print("OUTPUTPATH")
+    print(output_path)
+    print("OUTPUTPATH")
     if not os.path.isdir(output_path):
         response['status']['signal'] = 'error'
         response['status']['response'] = 'output_path does not exists.'
@@ -148,9 +151,6 @@ async def download_single_song(spotify_track_url: str) -> dict:
         return response
 
     # change directory to output path and perform download
-    print("OUTPUTPATH")
-    print(output_path)
-    print("OUTPUTPATH")
     os.chdir(output_path)
 
     # try to download the song
