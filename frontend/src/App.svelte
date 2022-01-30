@@ -119,7 +119,7 @@
 		<div class="header">
 			<h1 class="header__title">
 				<span class="header__span-1">Spoty</span><span class="header__span-2" class:invalid-url={!isUrlValid} class:valid-url={isUrlValid} class:invalid-url-interm={invalidUrlInterm}>free</span>
-				<Popup isHidde />
+				<Popup isHidden={isPopupHidden} />
 			</h1>
 		</div>
 
