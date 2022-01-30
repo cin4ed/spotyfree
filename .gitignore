@@ -342,3 +342,5 @@ pip-selfcheck.json
 # My shit
 extras
 backend/song_downloads/*
+.spotdl-cache
+notes.md
