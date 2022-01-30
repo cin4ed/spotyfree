@@ -1,8 +1,11 @@
 from fastapi import BackgroundTasks, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
+from pathlib import Path
 from app import spotyactions
 import os
+
+output_log_path = str(Path('./log.txt').absolute())
 
 app = FastAPI()
 
@@ -24,7 +27,7 @@ async def search(q: str):
         'status': {
             'signal': '',
             'description': '',
-            'valid_query': False
+            'valid_query': None
         },
         'resource': [],
     }
@@ -33,35 +36,35 @@ async def search(q: str):
     if "open.spotify.com" and "track" in q:
         data  = spotyactions.get_track_from_track_url(q)
 
-        response['status']['valid_query'] = True
-        
         if data['status'] == 'error':
             debulog(data, 'cannot get metadata from track')
 
             response['status']['signal'] = 'error'
             response['status']['description'] = 'could not get metadata about the track.'
-            return response
+            response['status']['valid_query'] = False
+            return response            
 
         response['status']['signal'] = 'success'
-        response['status']['description'] =  'metadata retrieved successfully'
+        response['status']['description'] = 'metadata retrieved successfully'
+        response['status']['valid_query'] = True
         response['resource'] = data['track']
         return response
 
     if 'open.spotify.com' and 'playlist' in q:
         data = spotyactions.get_tracks_from_playlist_url(q)
 
-        response['status']['valid_query'] = True
-
         if data['status'] == 'error':
             debulog(data, 'cannot get metadata from playlist')
 
             response['status']['signal'] = 'error'
             response['status']['description'] = 'could not get metadata from the playlist.'
+            response['status']['valid_query'] = False
             return response
 
         response['status']['signal'] = 'success'
         response['status']['description'] =  'metadata retrieved successfully'
         response['resource'] = data['playlist_tracks']
+        response['status']['valid_query'] = True
         return response
 
     # if the url is considered invalid
@@ -127,5 +130,5 @@ def debulog(data, txt):
     print(f'------------ {txt} ------------')
     print()
 
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    with open(output_log_path, "a") as myfile:
+        myfile.write(f'''------------ {txt} ------------\n{data}\n------------ {txt} ------------\n\n''')
