@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: 📦 Docker build
-        run: docker build . -t spotyfree:1.0.0
+        run: docker build . -t kennethquintero/spotyfree:latest
 
       - name: 🐳 Push to dockerhub
         env:
@@ -23,7 +23,7 @@ jobs:
           DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
         run: |
           docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
-          docker push spotyfree:1.0.0
+          docker push kennethquintero/spotyfree:latest
           
       - name: 💻 SSH into server and replace running container
         env:
