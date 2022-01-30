@@ -13,9 +13,9 @@ jobs:
         working-directory: ./backend
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: 📦 Docker build
-        run: docker build ./backend -t spotyfree:1.0.0
+        run: docker build . -t spotyfree:1.0.0
 
       - name: 🐳 Push to dockerhub
         env:
