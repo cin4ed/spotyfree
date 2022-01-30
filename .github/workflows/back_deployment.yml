@@ -27,11 +27,15 @@ jobs:
           
       - name: 💻 SSH into server and replace running container
         env:
-          ssh_key: ${{ secrets.LINODE_VM_SSH }}
-          target_ip: ${{ secrets.LINODE_VM_IP }}
-          user: ${{ secrets.LINODE_VM_USERNAME }}
-        run: |
-          echo "$ssh_key" > ~/ssh_key
-          chmod 600 ~/ssh_key
-          ssh -i ~/ssh_key -o StrictHostKeyChecking=no $user@$target_ip
-          ls
+          LOG_PATH: ${{ secrets.LINODE_VM_LOG_PATH }}
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.LINODE_VM_IP }}
+          username: ${{ secrets.LINODE_VM_USERNAME }}
+          key: ${{ secrets.LINODE_VM_SSH }}
+          script: |
+            docker pull kennethquintero/spotyfree:latest
+            docker stop spotyfree-container
+            docker rm spotyfree-container
+            docker run --name=spotyfree-container --restart=always -p 8000:80 -v $LOG_PATH:/spotyfree/log.txt -d kennethquintero/spotyfree:latest
+        
