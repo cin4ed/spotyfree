@@ -8,10 +8,12 @@ on:
 jobs:
   Build-and-push-docker-image:
     runs-on: ubuntu-latest
-    # defaults:
-    #   run:
-    #     working-directory: ./backend
+    defaults:
+      run:
+        working-directory: ./backend
     steps:
+      - uses: actions/checkout@v2
+      
       - name: 📦 Docker build
         run: docker build ./backend -t spotyfree:1.0.0
 
