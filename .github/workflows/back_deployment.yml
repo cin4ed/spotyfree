@@ -1,0 +1,35 @@
+name: Build and deploy backend
+
+on:
+  push:
+    paths:
+      - backend/**
+
+jobs:
+  Build-and-push-docker-image:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+    steps:
+      - name: 📦 Docker build
+        run: docker build . -t spotyfree:1.0.0
+
+      - name: 🐳 Push to dockerhub
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
+        run: |
+          docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+          docker push spotyfree:1.0.0
+          
+      - name: 💻 SSH into server and replace running container
+        env:
+          ssh_key: ${{ secrets.LINODE_VM_SSH }}
+          target_ip: ${{ secrets.LINODE_VM_IP }}
+          user: ${{ secrets.LINODE_VM_USERNAME }}
+        run: |
+          echo "$ssh_key" > ~/ssh_key
+          chmod 600 ~/ssh_key
+          ssh -i ~/ssh_key -o StrictHostKeyChecking=no $user@$target_ip
+          ls
